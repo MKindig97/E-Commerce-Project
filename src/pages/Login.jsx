@@ -1,14 +1,29 @@
 import { useState } from "react"
-import "./Authentication.css"
+import "./App.css"
 
-export default function Login ({ setToken} ) {
+export default function Login ({ token } ) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [popupStyle, showPopup] =useState("hide")
-  
-  const popup = () => {
-    showPopup("login-popup")
-    setTimeout(() => showPopup("hide"), 3000)
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [error, setError] = useState(null);
+  async function handleClick(event) {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        'https://fakestoreapi.com/auth/login',
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: Bearer ({token}),
+          },
+        }
+      );
+      const result = await response.json();
+      setSuccessMessage(result.message);
+    } catch (error) {
+      setError(error.message);
+    }
   }
 
  
@@ -32,8 +47,9 @@ export default function Login ({ setToken} ) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
-  
+        <button onClick={handleClick} type="submit">Login</button>
+        {successMessage && <p>{successMessage}</p>}
+      {error && <p>{error}</p>}
       </form>
     </div>
   )
