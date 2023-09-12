@@ -12,11 +12,15 @@ export default function Login ({ token } ) {
       const response = await fetch(
         'https://fakestoreapi.com/auth/login',
         {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: Bearer ({token}),
           },
+          body: JSON.stringify({
+            username: username,
+            password: password
+           }
+    )
         }
       );
       const result = await response.json();

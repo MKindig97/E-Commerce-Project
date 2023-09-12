@@ -6,7 +6,7 @@ export async function fetchAllProducts() {
       `${API_URL}/products`
     );
     const result = await response.json();
-   return result;
+    return (result);
   } catch (err) {
     console.error(err);
   }
@@ -16,6 +16,18 @@ export async function fetchProductById(id) {
   try {
     const response = await fetch(
       `${API_URL}/products/${id}`
+    );
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function fetchProductCategory() {
+  try {
+    const response = await fetch(
+      `${API_URL}/products/categories`
     );
     const result = await response.json();
     return result;

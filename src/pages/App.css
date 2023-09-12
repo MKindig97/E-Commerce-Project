@@ -41,9 +41,26 @@ main {
 }
 .product-card {
   flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 20px;
+  border: 2px solid #212529;
+  border-radius: 15px;
 }
 .link-button {
   border: 1px solid black;
   padding: 10px;
-  
+
+}
+.search-bar {
+  position: absolute;
+    margin-left: 875px;
+    margin-top: -84px;
+    width: 255px;
+}
+.bar-width {
+  width: 250px;
+}
+.section {
+  display: flex;
 }
