@@ -1,13 +1,13 @@
 import { createContext, useState } from "react";
 import { fetchAllProducts } from "../API"; // { getProductData } - Add in later if app does not work.
-
+import { fetchProductById } from "../API";
 export const CartContext = createContext({
   items: [],
   getProductQuantity: () => {},
   addOneToCart: () => {},
   removeOneFromCart: () => {},
   deleteFromCart: () => {},
-  // getTotalCost: () => {},
+  getTotalCost: () => {},
 });
 
 export function CartProvider({ children }) {
@@ -24,7 +24,7 @@ export function CartProvider({ children }) {
     return quantity;
   }
 
-  function addOneToCart(id,title,price) {
+  function addOneToCart(id, title, price) {
     const quantity = getProductQuantity(id);
 
     if (quantity === 0) {
@@ -73,12 +73,21 @@ export function CartProvider({ children }) {
     );
   }
 
-  // function getTotalCost() {
+  function getTotalCost() {
+    let totalCost = 0;
+    cartProducts.forEach((cartItem) => {
+      totalCost += cartItem.price * cartItem.quantity;
+    });
+    return totalCost;
+  }
+
+  // async function getTotalCost() {
   //   let totalCost = 0;
-  //   cartProducts.map((cartItem) => {
-  //     const productData = getProductData(cartItem.id); //getProductData may need to be replaced by fetchAllProducts later.
-  //     totalCost += (productData.price * cartItem.quantity);
-  //   })
+  //   for(const cartItem of cartProducts) {
+  //     const productData = await
+  //     fetchAllProducts(cartItem.id);
+  //     totalCost += productData.price * cartItem.quantity;
+  //   }
   //   return totalCost;
   // }
 
@@ -88,7 +97,7 @@ export function CartProvider({ children }) {
     addOneToCart,
     removeOneFromCart,
     deleteFromCart,
-    // getTotalCost,
+    getTotalCost,
   };
 
   return (

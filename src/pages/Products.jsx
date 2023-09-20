@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { fetchAllProducts } from "../API";
 import ProductCard from "../components/ProductCard";
-import { CartContext } from "../components/CartContext";
+
 
 export default function AllProducts() {
   const [products, setProducts] = useState([]);

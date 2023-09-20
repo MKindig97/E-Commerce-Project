@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import { useState, useContext } from 'react';
 import { CartContext } from './CartContext';
+import CartProduct from './CartProduct';
 
 export default function NavBar () {
   const [show, setShow] = useState(false);
@@ -12,6 +13,9 @@ export default function NavBar () {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   console.log(cart)
+
+  const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0)
+
   return (
     <>
     <Navbar bg="dark" data-bs-theme="dark">
@@ -20,19 +24,30 @@ export default function NavBar () {
       <Nav className="me-auto">
         <Nav.Link href="/login">Login</Nav.Link>
         <Nav.Link href="/register">Register Here</Nav.Link>
-        <Nav.Link href="/cart">My Cart</Nav.Link>
-      </Nav>
-      <Button onClick={handleShow}>Cart 0 items</Button>
-    </Container>
-  </Navbar>
-  <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose}>
     <Modal.Header closeButton >
       <Modal.Title>Shopping Cart</Modal.Title>
     </Modal.Header>
     <Modal.Body>
-      <h1>This is the modal body.</h1>
-    
-        {cart.items[0] && cart.items.map((product) =>  (
+      {productsCount > 0 ? 
+        <>
+          <p>Items in your cart: </p>
+          {cart.items.map((currentProduct, idx) => (
+              <CartProduct key={idx} title={currentProduct.title} price={currentProduct.price} id={currentProduct.id} quantity={currentProduct.quantity}></CartProduct>
+           ))}
+
+          <h1>Total: ${cart.getTotalCost().toFixed(2)}</h1>
+
+          <Button variant="success">
+              Purchase items!
+          </Button>
+          
+       </>
+      :
+        <h1>There are no items in your cart!</h1>
+      }
+     </Modal.Body>
+         {/* {cart.items[0] && cart.items.map((product) =>  (
         
            <div key={product.id}>
           <div>
@@ -46,9 +61,13 @@ export default function NavBar () {
           </div>
           </div>
         
-        ))}
-    </Modal.Body>
+        ))}  */}
   </Modal>
+      </Nav>
+      <Button className='main-cart-btn' onClick={handleShow}>Cart ({productsCount}) items</Button>
+    </Container>
+  </Navbar>
+  
   </>
   )
 }
