@@ -23,59 +23,63 @@ export default function SingleProduct() {
 
   return (
     <>
-      <Link to="/">Back to All Products</Link>
-      <div className="product-card">
-        <h2>{title}</h2>
-        <p>Item price: ${price}</p>
-        <img className="product-photo" src={image} alt={title} />
-        <p>{description}</p>
-        <section>
-          <p>Category: {category}</p>
-          {/*<p>Rating: {rating.rate}</p>*/}
-          {console.log(productQuantity)}
-        </section>
-        {productQuantity > 0 ? (
-          <>
-            <Form as={Row}>
-              <Form.Label column="true" sm="6">
-                In Cart: {productQuantity}
-              </Form.Label>
-              <Col sm="6">
-                <Button
-                  sm="6"
-                  onClick={() => cart.addOneToCart(id, title, price)}
-                  className="mx-2"
-                >
-                  +
-                </Button>
-                <Button
-                  sm="6"
-                  onClick={() => cart.removeOneFromCart(id)}
-                  className="mx-2"
-                >
-                  -
-                </Button>
-              </Col>
-            </Form>
-            <Button
-              variant="danger"
-              onClick={() => cart.deleteFromCart(id)}
-              className="my-2"
-            >
-              Remove from cart
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              className="cart-button"
-              variant="primary"
-              onClick={() => cart.addOneToCart(id, title, price)}
-            >
-              Add To Cart
-            </Button>
-          </>
-        )}
+      <div className="container-fluid">
+        <Link className="btn btn-outline-primary mt-2 pl-2" to="/">
+          Back to All Products
+        </Link>
+        <div className="product-card">
+          <h2>{title}</h2>
+          <p>Item price: ${price}</p>
+          <img className="product-photo" src={image} alt={title} />
+          <p>{description}</p>
+          <section>
+            <p>Category: {category}</p>
+            {/*<p>Rating: {rating.rate}</p>*/}
+            {console.log(productQuantity)}
+          </section>
+          {productQuantity > 0 ? (
+            <>
+              <Form as={Row}>
+                <Form.Label column="true" sm="6">
+                  In Cart: {productQuantity}
+                </Form.Label>
+                <Col sm="6">
+                  <Button
+                    sm="6"
+                    onClick={() => cart.addOneToCart(id, title, price)}
+                    className="mx-2"
+                  >
+                    +
+                  </Button>
+                  <Button
+                    sm="6"
+                    onClick={() => cart.removeOneFromCart(id)}
+                    className="mx-2"
+                  >
+                    -
+                  </Button>
+                </Col>
+              </Form>
+              <Button
+                variant="danger"
+                onClick={() => cart.deleteFromCart(id)}
+                className="my-2"
+              >
+                Remove from cart
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                className="cart-button"
+                variant="primary"
+                onClick={() => cart.addOneToCart(id, title, price)}
+              >
+                Add To Cart
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

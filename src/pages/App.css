@@ -1,10 +1,14 @@
+select,
+input[type="number"] {
+  margin: 4px;
+}
+
 .login-bar {
   height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .register-bar {
   height: 100vh;
@@ -12,7 +16,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .header-position {
   width: 100%;
@@ -35,13 +38,13 @@
   width: 100px;
 }
 main {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
 }
 .product-card {
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin: 16px;
   margin-bottom: 10px;
   padding: 20px;
   border: 2px solid #212529;
@@ -50,21 +53,31 @@ main {
 .link-button {
   border: 1px solid black;
   padding: 10px;
-
 }
 .search-bar {
   position: absolute;
-    margin-left: 875px;
-    margin-top: -84px;
-    width: 255px;
+  margin-left: 875px;
+  margin-top: -84px;
+  width: 255px;
 }
 .bar-width {
   width: 250px;
 }
 .section {
   display: flex;
+
 }
 .main-cart-btn {
   position: absolute;
   margin-left: 350px;
+}
+.sidebar {
+    margin-left: 8px;
+}
+a.navbar-brand {
+  margin-left: 8px;
+}
+.btn-spacer {
+  width: 20px;
+  height: 1px;
 }

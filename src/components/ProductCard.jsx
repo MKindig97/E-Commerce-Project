@@ -9,14 +9,18 @@ export default function ProductCard({ id, title, price, image, description }) {
   const productQuantity = cart.getProductQuantity(id);
   console.log(cart.items);
   return (
-    <div className="product-card">
+    <div className="product-card h-100 my-4">
       <h2>{title}</h2>
       <p>Item price: ${price}</p>
       <img className="product-photo" src={image} alt={title} />
       <p>{description}</p>
-      <Link className="link-button" to={`/products/${id}`}>
+      <Link
+        className="link-button btn btn-outline-primary"
+        to={`/products/${id}`}
+      >
         View Item Details
       </Link>
+      &nbsp; &nbsp;
       {productQuantity > 0 ? (
         <>
           <Form as={Row}>
